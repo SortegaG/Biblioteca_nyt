@@ -32,7 +32,10 @@ Este proyecto es una aplicación web que consume la API de listas de libros del 
 
 ## 📂 Estructura del Proyecto
 
-├── index.html # Estructura HTML principal ├── index.js # Lógica de la aplicación en JavaScript ├── style.css # Estilos de la aplicación, incluyendo diseño responsive └── README.md # Documentación del proyecto
+├── index.html # Estructura HTML principal 
+├── index.js # Lógica de la aplicación en JavaScript 
+├── style.css # Estilos de la aplicación, incluyendo diseño responsive 
+└── README.md # Documentación del proyecto
 
 
 ## 🛠️ Tecnologías Utilizadas
