@@ -127,3 +127,5 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
+const logOutButton = document.getElementById('logout')
+logOutButton.style.display = 'none';

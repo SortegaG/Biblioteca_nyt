@@ -92,5 +92,3 @@ function pintarListaDetalles(list) {
     });
 }
 
-const logOutButton = document.getElementById('logout')
-logOutButton.style.display = 'none';
