@@ -1,0 +1,261 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Estilo del header */
+header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Posicionamiento del contenedor de botones */
+#header-buttons {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilos para los botones en la esquina superior derecha */
+#header-buttons button {
+    padding: 8px 16px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#signin {
+    background-color: #007bff;
+}
+
+#signin:hover {
+    background-color: #005bb5;
+}
+
+#logout {
+    background-color: #d9534f;
+}
+
+#logout:hover {
+    background-color: #c9302c;
+}
+
+/* Estilos para el título principal */
+h1 {
+    font-size: 32px;
+    text-decoration: underline;
+    color: #333;
+    text-align: center;
+}
+
+/* Firebase- formularios */
+#forms-container {
+    display: flex;
+    gap: 20px; /* Espacio entre los formularios */
+    max-width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Estilos para los formularios */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    box-sizing: border-box;
+}
+
+form h3 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para el botón de Logout */
+#logout-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#logout-container p {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#salir {
+    background-color: #d9534f;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#salir:hover {
+    background-color: #c9302c;
+}
+
+/* Estilos de carga */
+.loader {
+    display: none;
+    font-size: 20px;
+    color: #007bff;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Contenedor de listas - diseño en cuadrícula con Flexbox */
+#book-lists, #content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Tarjeta de cada lista */
+.list-card, .book-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 250px; /* Ancho máximo de cada tarjeta */
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de texto en las tarjetas */
+.list-card h2, .book-card h3 {
+    font-size: 18px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.list-card p, .book-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Enlaces dentro de las tarjetas */
+.list-card a, .book-card a {
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.list-card a:hover, .book-card a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo de imagen de libro en tarjeta de libro */
+.book-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Botón Volver */
+button {
+    padding: 10px 20px;
+    background-color: #0073e6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+/* Media query para dispositivos más pequeños */
+@media (max-width: 600px) {
+    /* Botones en columna */
+    #header-buttons {
+        flex-direction: row;
+        gap: 5px;
+        position: static; /* Quitar la posición fija */
+        width: 100%; /* Ajustar ancho completo */
+        align-items: center;
+    }
+
+    #header-buttons button {
+        padding: 6px 12px; /* Botones más pequeños */
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
