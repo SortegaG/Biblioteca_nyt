@@ -31,12 +31,12 @@ Este proyecto es una aplicación web que consume la API de listas de libros del 
    - Enfoque mobile-first, adaptado a dispositivos móviles y pantallas de mayor tamaño.
 
 ## 📂 Estructura del Proyecto
-
+```bash
 ├── index.html # Estructura HTML principal 
 ├── index.js # Lógica de la aplicación en JavaScript 
 ├── style.css # Estilos de la aplicación, incluyendo diseño responsive 
 └── README.md # Documentación del proyecto
-
+```
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -44,6 +44,7 @@ Este proyecto es una aplicación web que consume la API de listas de libros del 
 - **CSS3** para estilos y animaciones.
 - **JavaScript (ES6)** para la lógica de la aplicación y la manipulación del DOM.
 - **Fetch API** para consumir la API del New York Times.
+- **Firebase** para poder registrarte y logearte en la web.
 
 ## 🚧 Requisitos Previos
 
@@ -81,5 +82,5 @@ Este proyecto es una aplicación web que consume la API de listas de libros del 
 
 - Implementar opciones de **filtrado y ordenación** de libros.
 - Añadir más detalles en la interfaz de cada libro, como el **autor** o **género**.
-- Mejora de la **accesibilidad** (uso de ARIA y navegación por teclado).
+- Implementación de **Favoritos** para poder almacenar los libros que necesites dentro de Firebase.
 - **Refactorización modular** para mantener escalabilidad en la aplicación.
