@@ -28,9 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// const logOutButton = document.getElementById('logout')
-// logOutButton.style.display = 'none';
-
 // ---------------------------------------------------------------------
 // Funciones de firebase
 
@@ -51,7 +48,7 @@ const signUpUser = (email, password) => {
                 email: user.email,
                 message: "hola!"
             });
-
+            
         })
         .catch((error) => {
             console.log("Error en el sistema" + error.message, "Error: " + error.code);
@@ -77,15 +74,12 @@ const signInUser = (email, password) => {
             console.log(`se ha logado ${user.email} ID:${user.uid}`)
             alert(`se ha logado ${user.email} ID:${user.uid}`)
             console.log("USER", user);
+            const container = document.getElementById('forms-container');
+            container.style.display = 'none';
 
-            const singInButton = document.getElementById('signin');
-            singInButton.style.display = 'none';
-
-            const logInButton = document.getElementById('login');
-            logInButton.style.display = 'none';
-
-            const logOutButton = document.getElementById('logout')
-            logOutButton.style.display = 'block';
+            hideSingInButton();
+            hideLogInButton();
+            viewLogOutButton();
         })
         .catch((error) => {
             let errorCode = error.code;
@@ -99,12 +93,51 @@ const signOut = () => {
     let user = firebase.auth().currentUser;
 
     firebase.auth().signOut().then(() => {
-        console.log("Sale del sistema: " + user.email)
+        console.log("Sale del sistema: " + user.email);
+
+        viewSingInButton();
+        viewLogInButton();
+        hideLogOutButton();
+
     }).catch((error) => {
         console.log("hubo un error: " + error);
     });
 }
 
+// -------------------------------------------------------------------------
+// Funciones para enselar y ocultar botones
+
+function viewSingInButton() {
+    const singInButton = document.getElementById('signin');
+    singInButton.style.display = 'block';
+}
+
+function viewLogInButton() {
+    const logInButton = document.getElementById('login');
+    logInButton.style.display = 'block';
+}
+
+function viewLogOutButton() {
+    const logOutButton = document.getElementById('logout')
+    logOutButton.style.display = 'block';
+}
+
+function hideSingInButton() {
+    const singInButton = document.getElementById('signin');
+    singInButton.style.display = 'none';
+}
+
+function hideLogInButton() {
+    const logInButton = document.getElementById('login');
+    logInButton.style.display = 'none';
+}
+
+function hideLogOutButton() {
+    const logOutButton = document.getElementById('logout')
+    logOutButton.style.display = 'none';
+}
+
+// --------------------------------------------------------------------------------------
 
 document.getElementById("form2").addEventListener("submit", function (event) {
     event.preventDefault();
