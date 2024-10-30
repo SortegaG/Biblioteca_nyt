@@ -18,147 +18,79 @@ const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('signin').addEventListener('click', function (event)  {
+    const logOutButton = document.getElementById('logout');
+    logOutButton.style.display = 'none';
+
+    document.getElementById('signin').addEventListener('click', function () {
         const register = document.getElementById('form-register');
-        register.style.display = 'block';
+        register.style.display = (register.style.display === 'block') ? 'none' : 'block';
     });
-    document.getElementById('login').addEventListener('click', function (event)  {
+
+    document.getElementById('login').addEventListener('click', function () {
         const logger = document.getElementById('form-login');
-        logger.style.display = 'block';
+        logger.style.display = (logger.style.display === 'block') ? 'none' : 'block';
     });
 });
 
-// ---------------------------------------------------------------------
-// Funciones de firebase
+
+// Funciones de autenticación de Firebase
 
 const signUpUser = (email, password) => {
-    firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
+    firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Signed in
-            console.log(userCredential)
             let user = userCredential.user;
-            console.log(`se ha registrado ${user.email} ID:${user.uid}`)
-            alert(`se ha registrado ${user.email} ID:${user.uid}`)
-            // ...
-            // Saves user in firestore
-            createUser({
-                id: user.uid,
-                email: user.email,
-                message: "hola!"
-            });
-            
+            alert(`Usuario registrado: ${user.email}`);
+            createUser({ id: user.uid, email: user.email, message: "hola!" });
         })
-        .catch((error) => {
-            console.log("Error en el sistema" + error.message, "Error: " + error.code);
-        });
+        .catch((error) => alert("Error al registrar usuario: " + error.message));
 };
-
-
-document.getElementById("form1").addEventListener("submit", function (event) {
-    event.preventDefault();
-    let email = event.target.elements.email.value;
-    let pass = event.target.elements.pass.value;
-    let pass2 = event.target.elements.pass2.value;
-
-    pass === pass2 ? signUpUser(email, pass) : alert("error password");
-})
-
 
 const signInUser = (email, password) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Signed in
             let user = userCredential.user;
-            console.log(`se ha logado ${user.email} ID:${user.uid}`)
-            alert(`se ha logado ${user.email} ID:${user.uid}`)
-            console.log("USER", user);
-            const container = document.getElementById('forms-container');
-            container.style.display = 'none';
-
-            hideSingInButton();
-            hideLogInButton();
-            viewLogOutButton();
+            alert(`Usuario logueado: ${user.email}`);
+            toggleUserInterface(true); 
         })
-        .catch((error) => {
-            let errorCode = error.code;
-            let errorMessage = error.message;
-            console.log(errorCode)
-            console.log(errorMessage)
-        });
-}
+        .catch((error) => alert("Error al iniciar sesión: " + error.message));
+};
 
 const signOut = () => {
-    let user = firebase.auth().currentUser;
-
     firebase.auth().signOut().then(() => {
-        console.log("Sale del sistema: " + user.email);
+        alert("Sesión cerrada");
+        toggleUserInterface(false); 
+    }).catch((error) => alert("Error al cerrar sesión: " + error.message));
+};
 
-        viewSingInButton();
-        viewLogInButton();
-        hideLogOutButton();
-
-    }).catch((error) => {
-        console.log("hubo un error: " + error);
-    });
-}
-
-// -------------------------------------------------------------------------
-// Funciones para enselar y ocultar botones
-
-function viewSingInButton() {
-    const singInButton = document.getElementById('signin');
-    singInButton.style.display = 'block';
-}
-
-function viewLogInButton() {
-    const logInButton = document.getElementById('login');
-    logInButton.style.display = 'block';
-}
-
-function viewLogOutButton() {
-    const logOutButton = document.getElementById('logout')
-    logOutButton.style.display = 'block';
-}
-
-function hideSingInButton() {
-    const singInButton = document.getElementById('signin');
-    singInButton.style.display = 'none';
-}
-
-function hideLogInButton() {
-    const logInButton = document.getElementById('login');
-    logInButton.style.display = 'none';
-}
-
-function hideLogOutButton() {
-    const logOutButton = document.getElementById('logout')
-    logOutButton.style.display = 'none';
-}
-
-// --------------------------------------------------------------------------------------
-
-document.getElementById("form2").addEventListener("submit", function (event) {
+// Evento de envío del formulario de registro
+document.getElementById("form1").addEventListener("submit", function (event) {
     event.preventDefault();
-    let email = event.target.elements.email2.value;
-    let pass = event.target.elements.pass3.value;
-    signInUser(email, pass)
-})
-document.getElementById("salir").addEventListener("click", signOut);
-
-// Listener de usuario en el sistema
-// Controlar usuario logado
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        console.log(`Está en el sistema:${user.email} ${user.uid}`);
-        document.getElementById("message").innerText = `Está en el sistema: ${user.uid}`;
-
-    } else {
-        console.log("no hay usuarios en el sistema");
-        document.getElementById("message").innerText = `No hay usuarios en el sistema`;
-    }
+    const email = event.target.elements.email.value;
+    const pass = event.target.elements.pass.value;
+    const pass2 = event.target.elements.pass2.value;
+    pass === pass2 ? signUpUser(email, pass) : alert("Las contraseñas no coinciden");
 });
 
-const logOutButton = document.getElementById('logout')
-logOutButton.style.display = 'none';
+// Evento de envío del formulario de inicio de sesión
+document.getElementById("form2").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const email = event.target.elements.email2.value;
+    const pass = event.target.elements.pass3.value;
+    signInUser(email, pass);
+});
+
+// Evento de click en el botón de logout
+document.getElementById("logout").addEventListener("click", signOut);
+
+// Control de estado de autenticación
+firebase.auth().onAuthStateChanged(function (user) {
+    toggleUserInterface(!!user); // Cambia la interfaz según si hay un usuario logueado o no
+});
+// -------------------------------------------------------------------------
+
+function toggleUserInterface(isLoggedIn) {
+    document.getElementById('signin').style.display = isLoggedIn ? 'none' : 'block';
+    document.getElementById('login').style.display = isLoggedIn ? 'none' : 'block';
+    document.getElementById('logout').style.display = isLoggedIn ? 'block' : 'none';
+    document.getElementById('forms-container').style.display = isLoggedIn ? 'none' : 'block';
+}
