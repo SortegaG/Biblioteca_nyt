@@ -1,14 +1,16 @@
-const BASE_URL= 'https://api.nytimes.com/svc/books/v3/lists'
-const API_KEY = 'Vdy9zGETp9GFsQwbAh8DZVYXG4a8upH7';
-//https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=${API_KEY} api que funciona
 
-// const API_KEY = "Vdy9zGETp9GFsQwbAh8DZVYXG4a8upH7"; // Reemplaza con tu clave de NYT API
-// const BASE_URL = "https://api.nytimes.com/svc/books/v3/lists/current/${listId}.json?api-key=DENT6dhi6vGUH17jqUTR8wAOvTMXFGbe";
+// Variables donde almacenar las APIS
+
+const BASE_URL = 'https://api.nytimes.com/svc/books/v3/lists'
+const API_KEY = 'Vdy9zGETp9GFsQwbAh8DZVYXG4a8upH7';
+
+// ----------------------------------------------------------------------------------------------------
 
 // Seleccionar elementos del DOM
 const content = document.getElementById('content');
 const loader = document.getElementById('loader');
 const bookListsContainer = document.getElementById('book-lists');
+
 
 // Mostrar el cargador y cargar listas iniciales
 loader.style.display = 'block';
@@ -36,7 +38,7 @@ function pintarListasLibros(results) {
     results.forEach(list => {
         const listCard = document.createElement('div');
         listCard.className = 'list-card';
-        
+
         listCard.innerHTML = `
             <h2>${list.list_name}</h2>
             <p>Fecha del libro más antiguo: ${list.oldest_published_date}</p>
@@ -89,3 +91,6 @@ function pintarListaDetalles(list) {
         content.appendChild(bookCard);
     });
 }
+
+const logOutButton = document.getElementById('logout')
+logOutButton.style.display = 'none';
