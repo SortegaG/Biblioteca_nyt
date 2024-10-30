@@ -21,9 +21,11 @@ header {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 50px;
     color: #333;
 }
+
+
 
 /* Estilos de carga */
 .loader {
@@ -38,54 +40,86 @@ h1 {
     50% { opacity: 0.5; }
 }
 
-/* Contenedor de listas */
-#book-lists {
+/* Contenedor de listas - diseño en cuadrícula con Flexbox */
+#book-lists, #content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
     width: 100%;
-    max-width: 600px;
+    max-width: 1200px;
 }
 
 /* Tarjeta de cada lista */
-.list-card {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 10px;
+.list-card, .book-card {
     background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    cursor: pointer;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 250px; /* Ancho máximo de cada tarjeta */
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.list-card h2 {
+/* Estilos de texto en las tarjetas */
+.list-card h2, .book-card h3 {
     font-size: 18px;
     color: #555;
+    margin: 10px 0;
 }
 
-.list-card p {
+.list-card p, .book-card p {
     font-size: 14px;
     color: #666;
 }
 
-.list-card a {
+/* Enlaces dentro de las tarjetas */
+.list-card a, .book-card a {
     color: #007bff;
     text-decoration: none;
+    margin-top: 10px;
 }
 
-/* Estilos de libro individual */
-.book-card {
-    margin: 10px 0;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
+.list-card a:hover, .book-card a:hover {
+    text-decoration: underline;
 }
 
+/* Estilo de imagen de libro en tarjeta de libro */
 .book-card img {
-    max-width: 100%;
+    width: 100%;
+    height: auto;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
+/* Botón "Volver" */
+button {
+    padding: 10px 20px;
+    background-color: #0073e6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+/* Media query para dispositivos más grandes */
 @media (min-width: 768px) {
     h1 {
         font-size: 32px;
     }
-    .list-card h2 {
+    .list-card h2, .book-card h3 {
         font-size: 20px;
+    }
+    .list-card, .book-card {
+        max-width: 300px; /* Mayor ancho en pantallas más grandes */
     }
 }

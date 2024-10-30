@@ -42,14 +42,14 @@ function pintarListasLibros(results) {
             <p>Fecha del libro más antiguo: ${list.oldest_published_date}</p>
             <p>Última fecha de incorporación: ${list.newest_published_date}</p>
             <p>Frecuencia de actualización: ${list.updated}</p>
-            <a href="#" onclick="loadListDetails('${list.list_name_encoded}')">Ver lista completa</a>
+            <a href="#" onclick="cargarDetalles('${list.list_name_encoded}')">Ver lista completa</a>
         `;
         bookListsContainer.appendChild(listCard);
     });
 }
 
 // Función para cargar detalles de una lista específica
-async function loadListDetails(list_name_encoded) {
+async function cargarDetalles(list_name_encoded) {
     loader.style.display = 'block';
     bookListsContainer.innerHTML = ''; // Limpiar el contenedor
 
@@ -59,7 +59,7 @@ async function loadListDetails(list_name_encoded) {
         const list = data.results;
 
         loader.style.display = 'none';
-        renderListDetails(list);
+        pintarListaDetalles(list);
     } catch (error) {
         loader.textContent = 'Error al cargar los detalles de la lista.';
         console.error(error);
@@ -67,11 +67,12 @@ async function loadListDetails(list_name_encoded) {
 }
 
 // Función para renderizar detalles de una lista específica
-function renderListDetails(list) {
+function pintarListaDetalles(list) {
     const backButton = document.createElement('button');
+    const divBackButton = document.getElementById('back-btn')
     backButton.textContent = 'Volver';
     backButton.onclick = () => location.reload();
-    content.appendChild(backButton);
+    divBackButton.appendChild(backButton);
 
     list.books.forEach((book, index) => {
         const bookCard = document.createElement('div');
