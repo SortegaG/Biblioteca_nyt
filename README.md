@@ -2,10 +2,6 @@
 
 Este proyecto es una aplicación web que consume la API de listas de libros del [New York Times] para mostrar y gestionar información sobre libros. La aplicación está desarrollada con HTML, CSS y JavaScript (ES6), sin el uso de frameworks o librerías externas.
 
-## 👀 Enlace al proyecto
-
-¡Puedes usar este link para acceder al proyecto y navegar por todas las librerías! https://sortegag.github.io/Biblioteca_nyt/#
-
 ## 🎯 Objetivos del Proyecto
 
 - Consumir la API del New York Times y cargar dinámicamente los datos de listas de libros.
